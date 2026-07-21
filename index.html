@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParrotMC Store | Premium Minecraft Network</title>
+    <link href="https://cdnjs.cloudflare.com/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Modern Reset & Smooth Scroll */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary-green: #00ff66;
+            --dark-green: #052910;
+            --bg-black: #0a0f0b;
+            --card-bg: #111a13;
+            --glow-color: rgba(0, 255, 102, 0.4);
+            --fire-orange: #ff5500;
+        }
+
+        body {
+            background-color: #080d08;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Desktop Cursor Modifications */
+        @media (min-width: 992px) {
+            html, body, a, button, input {
+                cursor: none !important;
+            }
+
+            #fire-cursor {
+                position: fixed;
+                width: 35px;
+                height: 35px;
+                background: radial-gradient(circle, #ffcc00 10%, #ff4500 50%, rgba(255,0,0,0) 80%);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9998;
+                filter: blur(4px);
+                mix-blend-mode: screen;
+                transform: translate(-50%, -50%);
+                animation: fireGlow 0.4s infinite alternate;
+            }
+
+            #follower-parrot {
+                position: fixed;
+                font-size: 32px;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                filter: drop-shadow(0 0 12px var(--fire-orange));
+                animation: wingFlap 0.5s infinite alternate;
+            }
+        }
+
+        /* Hide Custom Cursor on Mobile/Tablet Touch Screens */
+        @media (max-width: 991px) {
+            #fire-cursor, #follower-parrot {
+                display: none !important;
+            }
+        }
+
+        @keyframes fireGlow {
+            0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @keyframes wingFlap {
+            0% { transform: translate(-50%, -50%) scale(1) rotate(-8deg); }
+            100% { transform: translate(-50%, -50%) scale(1.15) rotate(12deg); }
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 15, 11, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--dark-green);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary-green);
+            text-shadow: 0 0 12px var(--glow-color);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-parrot {
+            display: inline-block;
+            font-size: 28px;
+            animation: headerParrot 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes headerParrot {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-5px) rotate(-15deg); }
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: #cfcfcf;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-green);
+            text-shadow: 0 0 8px var(--primary-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 40px;
+            background: radial-gradient(circle, var(--dark-green) 0%, var(--bg-black) 70%);
+        }
+
+        .hero-parrot {
+            font-size: 70px;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: flightMotion 3s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 25px var(--primary-green));
+            user-select: none;
+        }
+
+        @keyframes flightMotion {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(10deg) scale(1.1); }
+            100% { transform: translateY(10px) rotate(-8deg) scale(0.95); }
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary-green);
+            text-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: #aaaaaa;
+            max-width: 600px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .btn-main {
+            background: var(--primary-green);
+            color: #000;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 800;
+            border: none;
+            border-radius: 8px;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 0 0 15px var(--glow-color);
+            transition: 0.3s;
+        }
+
+        /* Section Container */
+        .container {
+            padding: 50px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 35px;
+            color: #fff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--primary-green);
+            display: block;
+            margin: 8px auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary-green);
+        }
+
+        /* Responsive Store Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Rank Cards */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--dark-green);
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        }
+
+        .badge-free {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary-green);
+            color: #000;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-top: 10px;
+            margin-bottom: 12px;
+            color: var(--primary-green);
+        }
+
+        .task-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid var(--primary-green);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #dddddd;
+            margin-bottom: 18px;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .btn-claim {
+            background: #5865F2;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            width: 100%;
+            transition: 0.3s;
+            touch-action: manipulation;
+        }
+
+        .btn-claim:active {
+            transform: scale(0.98);
+        }
+
+        /* Big Coming Soon Banner */
+        .big-soon-card {
+            background: linear-gradient(145deg, #0d1a10, #040805);
+            border: 2px dashed var(--primary-green);
+            border-radius: 14px;
+            padding: 40px 15px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.15);
+        }
+
+        .big-soon-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--primary-green);
+            text-shadow: 0 0 20px var(--glow-color);
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 10px var(--glow-color); transform: scale(1); }
+            100% { text-shadow: 0 0 25px var(--primary-green); transform: scale(1.02); }
+        }
+
+        .big-soon-sub {
+            color: #888888;
+            font-size: 15px;
+        }
+
+        /* About Section Styles */
+        .about-box {
+            background: linear-gradient(135deg, rgba(17, 26, 19, 0.9), rgba(5, 41, 16, 0.4));
+            border: 2px solid var(--dark-green);
+            border-radius: 16px;
+            padding: 30px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-text {
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.7;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .about-text strong {
+            color: var(--primary-green);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            border-radius: 10px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-4px);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            color: var(--primary-green);
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .feature-card h4 {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: #999999;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Modal / Popup Notice Window */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .modal-box {
+            background: #0d170f;
+            border: 2px solid var(--primary-green);
+            border-radius: 14px;
+            padding: 25px 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.3);
+            animation: modalPop 0.3s ease-out;
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-box h3 {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .modal-notice {
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .btn-done {
+            background: var(--primary-green);
+            color: #000;
+            font-size: 15px;
+            font-weight: 900;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 6px;
+            text-transform: uppercase;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        /* Floating Support Button */
+        .support-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #5865F2;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.8);
+            z-index: 1000;
+            border: 2px solid #7289da;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            background: #040805;
+            border-top: 1px solid var(--dark-green);
+            color: #666;
+            font-size: 13px;
+        }
+
+        footer span {
+            color: var(--primary-green);
+        }
+
+        /* Media Queries for Desktop Enlargements */
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 45px; }
+            .hero p { font-size: 17px; }
+            .logo { font-size: 26px; }
+            nav a { font-size: 16px; margin-left: 20px; }
+            .section-title { font-size: 34px; }
+            .big-soon-title { font-size: 55px; }
+            .about-box { padding: 40px 30px; }
+            .about-text { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Desktop Fire Trail & Parrot Cursor -->
+    <div id="fire-cursor"></div>
+    <div id="follower-parrot">🦜</div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <span class="logo-parrot">🦜</span> 
+            <span>ParrotMc Store</span>
+        </div>
+        <nav>
+            <a href="#free-ranks">Free</a>
+            <a href="#paid-ranks">Paid</a>
+            <a href="#about">About</a>
+            <a href="https://discord.gg/Aep2h2HvKU" target="_blank">Discord</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-parrot">🦜</div>
+        <h1>Welcome to <span>ParrotMC Store</span></h1>
+        <p>Complete simple tasks, play in our Minecraft server, and claim free ranks!</p>
+        <a href="#free-ranks" class="btn-main"><i class="fa-solid fa-gift"></i> Claim Free Rank</a>
+    </section>
+
+    <!-- Free Ranks Section -->
+    <section class="container" id="free-ranks">
+        <h2 class="section-title">Free Ranks & Tasks</h2>
+        <div class="grid">
+            
+            <!-- VIP Rank -->
+            <div class="card">
+                <span class="badge-free">FREE TASK</span>
+                <h3>VIP Rank</h3>
+                <div class="task-box">
+                    <strong><i class="fa-solid fa-tasks"></i> Task:</strong><br>
+                    Join our Discord server and bring <strong>1 Invite</strong>.
+                </div>
+                <button class="btn-claim" onclick="openNoticeModal()"><i class="fa-brands fa-discord"></i> Claim VIP</button>
+            </div>
+
+            <!-- Parrot Rank -->
+            <div class="card">
+                <span class="badge-free">FREE TASK</span>
+                <h3>Parrot Rank</h3>
+                <div class="task-box">
+                    <strong><i class="fa-solid fa-clock"></i> Task:</strong><br>
+                    Get <strong>10 Hours Playtime</strong> inside the MC server.
+                </div>
+                <button class="btn-claim" onclick="openNoticeModal()"><i class="fa-brands fa-discord"></i> Claim Parrot</button>
+            </div>
+
+            <!-- Parrot+ Rank -->
+            <div class="card">
+                <span class="badge-free">FREE TASK</span>
+                <h3>Parrot+ Rank</h3>
+                <div class="task-box">
+                    <strong><i class="fa-solid fa-coins"></i> Task:</strong><br>
+                    Get <strong>14 Hours Playtime</strong> + <strong>$1M In-Game Money</strong>.
+                </div>
+                <button class="btn-claim" onclick="openNoticeModal()"><i class="fa-brands fa-discord"></i> Claim Parrot+</button>
+            </div>
+
+            <!-- Deadliest Rank -->
+            <div class="card">
+                <span class="badge-free">FREE TASK</span>
+                <h3>Deadliest Rank</h3>
+                <div class="task-box">
+                    <strong><i class="fa-solid fa-skull"></i> Task:</strong><br>
+                    Get <strong>30 Kills</strong> in the MC server.
+                </div>
+                <button class="btn-claim" onclick="openNoticeModal()"><i class="fa-brands fa-discord"></i> Claim Deadliest</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Paid Ranks Section -->
+    <section class="container" id="paid-ranks">
+        <h2 class="section-title">Paid Ranks</h2>
+        <div class="big-soon-card">
+            <div class="big-soon-title">SOON</div>
+            <p class="big-soon-sub">Paid ranks & store packages are under development. Stay tuned!</p>
+        </div>
+    </section>
+
+    <!-- About Section (Placed at the end) -->
+    <section class="container" id="about">
+        <h2 class="section-title">About ParrotMC</h2>
+        <div class="about-box">
+            <p class="about-text">
+                Welcome to <strong>ParrotMC Network</strong> — designed to deliver a next-level, <strong>Premium Minecraft Experience</strong> for every player. Built on optimized server architecture, we offer lag-free gameplay, custom-designed features, and a thriving community where skills, strategy, and playtime truly pay off.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>Zero Lag Gaming</h4>
+                    <p>High TPS servers optimized for fluid PvP, base building, and uninterrupted survival play.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4>Fair Gameplay</h4>
+                    <p>Advanced anti-cheat systems and active staff to ensure a secure, friendly environment.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-crown"></i></div>
+                    <h4>Play to Win</h4>
+                    <p>No forced pay-to-win mechanics. Complete in-game tasks to unlock premium ranks for free!</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                    <h4>Active Community</h4>
+                    <p>Join an energetic community with daily events, giveaways, and dedicated Discord support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notice Modal Popup -->
+    <div class="modal-overlay" id="noticeModal">
+        <div class="modal-box">
+            <h3><i class="fa-solid fa-circle-exclamation" style="color: var(--primary-green);"></i> Important Notice</h3>
+            <div class="modal-notice">
+                Create a ticket with the name of <strong>"free staff"</strong>
+            </div>
+            <button class="btn-done" onclick="goToDiscord()">DONE</button>
+        </div>
+    </div>
+
+    <!-- Floating Support Button -->
+    <a href="https://discord.gg/Aep2h2HvKU" target="_blank" class="support-btn">
+        <i class="fa-brands fa-discord" style="font-size: 18px;"></i>
+        <span>Support</span>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 <span>ParrotMC Store</span>. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const fireCursor = document.getElementById('fire-cursor');
+        const follower = document.getElementById('follower-parrot');
+
+        // Mouse Cursor Tracking (Desktop Only)
+        if (window.innerWidth >= 992) {
+            document.addEventListener('mousemove', (e) => {
+                fireCursor.style.left = `${e.clientX}px`;
+                fireCursor.style.top = `${e.clientY}px`;
+
+                follower.style.left = `${e.clientX}px`;
+                follower.style.top = `${e.clientY}px`;
+            });
+        }
+
+        // Modal Functions
+        function openNoticeModal() {
+            document.getElementById('noticeModal').style.display = 'flex';
+        }
+
+        function goToDiscord() {
+            window.open('https://discord.gg/Aep2h2HvKU', '_blank');
+            document.getElementById('noticeModal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
